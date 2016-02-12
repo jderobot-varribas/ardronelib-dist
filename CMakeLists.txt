@@ -8,11 +8,11 @@ project(ardronelib)
 
 
 ## Build ARDrone SDK here
-set (ARDRONE_SDK_FLAVOR "autonomy-gps")
-# Available options:
-# official-patched - stripped vanilla SDK 2.0.1 with makefile patches to allow build
-# autonomy-lastest - possible fixes and features (like multiple robots with same driver)
-# autonomy-gps - experimental GPS support
+set (ARDRONE_SDK_FLAVOR "autonomy-gps" CACHE STRING "ARDrone SDK flavor.
+Available options:
+ * official-patched - stripped vanilla SDK 2.0.1 with makefile patches to allow build
+ * autonomy-lastest - possible fixes and features (like multiple robots with same driver)
+ * autonomy-gps - experimental GPS support")
 
 if (${ARDRONE_SDK_FLAVOR} STREQUAL "official-patched")
     set(GIT_TAG bdacd1cbd3fbc54263d29e6e2067265e5941d10e)
@@ -40,24 +40,6 @@ ExternalProject_Add(${ARDRONE_SDK_NAME}
 ExternalProject_Get_Property(ardronelib SOURCE_DIR)
 set(ARDRONE_SDK_MISCELANEOUS_DIR ${SOURCE_DIR})
 
-
-## pkg-config
-set(prefix ${CMAKE_INSTALL_PREFIX})
-set(libdir ${prefix}/lib/jderobot/ardrone)
-
-set(includedir ${prefix}/include/jderobot/ardrone/FFMPEG/Includes)
-configure_file(ffmpeg-0.8.pc.in ffmpeg-0.8.pc)
-
-set(VERSION ${ARDRONE_SDK_FLAVOR})
-set(includedir
-	${prefix}/include/jderobot/ardrone/
-	${prefix}/include/jderobot/ardrone/Soft/Common
-	${prefix}/include/jderobot/ardrone/Soft/Lib
-	${prefix}/include/jderobot/ardrone/VP_SDK
-	${prefix}/include/jderobot/ardrone/VP_SDK/VP_Os/linux
-	${prefix}/include/jderobot/ardrone/VP_SDK/VP_Api
-)
-configure_file(ardronelib.pc.in ardronelib.pc)
 
 include(install_it.cmake)
 include(cpack_it.cmake)

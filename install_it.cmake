@@ -41,6 +41,26 @@ add_custom_target(uninstall
 
 
 ## pkg-config
+# Config
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(libdir ${prefix}/lib/jderobot/ardrone)
+
+set(includedir ${prefix}/include/jderobot/ardrone/FFMPEG/Includes)
+configure_file(ffmpeg-0.8.pc.in ffmpeg-0.8.pc)
+
+set(VERSION ${ARDRONE_SDK_FLAVOR})
+set(includedir
+        ${prefix}/include/jderobot/ardrone/
+        ${prefix}/include/jderobot/ardrone/Soft/Common
+        ${prefix}/include/jderobot/ardrone/Soft/Lib
+        ${prefix}/include/jderobot/ardrone/VP_SDK
+        ${prefix}/include/jderobot/ardrone/VP_SDK/VP_Os/linux
+        ${prefix}/include/jderobot/ardrone/VP_SDK/VP_Api
+)
+configure_file(ardronelib.pc.in ardronelib.pc)
+
+
+# Install
 install(FILES
 	"${CMAKE_BINARY_DIR}/ardronelib.pc"
 	"${CMAKE_BINARY_DIR}/ffmpeg-0.8.pc"
