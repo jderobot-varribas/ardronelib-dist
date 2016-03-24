@@ -8,17 +8,13 @@ It will install *ARDroneSDK 2.0.1* dependency for *ardrone_server*
 Install
 -------
 * Create a build directory
-
-  `mkdir ardronelib-build`
-  
-* Just get **CMakeLists.txt** with 
-
-  `wget https://raw.githubusercontent.com/RoboticsURJC/JdeRobot-ThirdParty/master/ardronelib/CMakeLists.txt`
-  
-* Build it:
-
   ```
-  cmake .
+  mkdir -p build && cd build
+  ```
+
+* Build it:
+  ```
+  cmake ..
   make
   sudo make install
   ```
